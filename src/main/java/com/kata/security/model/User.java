@@ -2,21 +2,9 @@ package com.kata.security.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -30,6 +18,8 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true)
     private String username;
 
+    @NotEmpty(message = "Username cannot be empty")
+    @Size(min = 2, max = 15, message = "Name should be between 2 and 15 latin characters")
     @Column(name = "password")
     private String password;
 
